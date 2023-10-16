@@ -39,7 +39,7 @@ pub async fn download_to_file(
     let result = s3_client
         .get_object()
         .bucket(bucket)
-        .key(key.clone())
+        .key(key)
         .send()
         .await
         .map_err(|e| {
@@ -70,7 +70,7 @@ pub async fn upload_file(
     s3_client
         .put_object()
         .bucket(bucket)
-        .key(key.clone())
+        .key(key)
         .body(ByteStream::from_path(path).await?)
         .send()
         .await
